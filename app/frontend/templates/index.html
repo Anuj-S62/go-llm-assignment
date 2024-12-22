@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload and Operate</title>
     <script>
+        let file_path = '';
         async function uploadFile(event) {
             event.preventDefault(); 
             const fileInput = document.getElementById('file-input');
@@ -26,6 +27,7 @@
 
                 if (response.ok) {
                     const result = await response.json();
+                    file_path = result.file_path;
                     showUploadResult(result);
                     showOperationButtons(result);
                 } else {
@@ -62,6 +64,9 @@
         function showOperationButtons(result) {
             const operationsContainer = document.getElementById('operations-container');
             operationsContainer.style.display = 'block';
+            const file_path = result.file_path;
+            operationsContainer.innerHTML = '';
+            operationsContainer.innerHTML = '<h2>Select an Operation</h2>';
 
             const numericalColumns = Object.keys(result.columns).filter(column =>
                 result.columns[column].every(value => !isNaN(value))
@@ -90,12 +95,13 @@
             }
 
             try {
+                console.log(file_path);
                 const response = await fetch('http://localhost:5001/process', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ column, operation }),
+                    body: JSON.stringify({ column, operation, file_path}),
                 });
 
                 if (response.ok) {

@@ -33,10 +33,11 @@ It is essential that you leverage a Language Model (large/small) to generate the
 
 1. **Clone and setup the repository**  
    ```bash
-    git clone <repository-url>
+    git clone git@github.com:Anuj-S62/go-llm-assignment.git
     cd go-llm-assignment
     python3 -m venv .venv
     source .venv/bin/activate 
+    cd app
     pip install -r requirements.txt
     ```
 
