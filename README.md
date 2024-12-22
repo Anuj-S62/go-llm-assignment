@@ -58,4 +58,4 @@ It is essential that you leverage a Language Model (large/small) to generate the
 - Perform any operation on single column at a time.
 
 ## Demo Video Drive Link
-![Demo Video](https://drive.google.com/file/d/1-3PmmeF6Kz71qt8WqRwM_0bjETiBGJDS/view?usp=drive_link)
+[Demo Video](https://drive.google.com/file/d/1-3PmmeF6Kz71qt8WqRwM_0bjETiBGJDS/view?usp=drive_link)
