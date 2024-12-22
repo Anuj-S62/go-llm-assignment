@@ -3,7 +3,7 @@ import threading
 
 
 class DatabaseHandler:
-    DB_PATH = 'app.db'
+    DB_PATH = '../app.db'
 
     def __init__(self):
         self.lock = threading.Lock()

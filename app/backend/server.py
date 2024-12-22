@@ -45,7 +45,7 @@ class AppServer:
                     df = pd.read_excel(file_path) if filename.endswith('.xlsx') else pd.read_csv(file_path)
                     numerical_columns = df.select_dtypes(include=['float64', 'int64']).to_dict(orient='list')
 
-                    return jsonify({"columns": numerical_columns}), 200
+                    return jsonify({"columns": numerical_columns,"file_path":file_path}), 200
                 return jsonify({"error": "Invalid file format"}), 400
             except Exception as e:
                 return jsonify({"error": f"File upload failed: {str(e)}"}), 500
@@ -56,10 +56,10 @@ class AppServer:
                 data = request.json
                 column = data.get('column')
                 operation = data.get('operation')
+                file_path = data.get('file_path')
                 if not column or not operation:
                     return jsonify({"error": "Invalid request data"}), 400
 
-                file_path = os.path.join(self.app.config['UPLOAD_FOLDER'], 'test.csv')
                 if not os.path.exists(file_path):
                     return jsonify({"error": "Uploaded file not found"}), 404
 

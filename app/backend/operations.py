@@ -20,11 +20,15 @@ class OperationsHandler:
             "Do not include any import statements or code to read the input list of numbers. do not include any code to print the output."
             "The function should be defined as follows:\n\n def operation(values):\n   # Write your code here\n    pass\n\nThe list of numbers is stored in the variable 'values'. The function should return the {operation} of the list of numbers."
         )
-        response = openai.ChatCompletion.create(
-            model="gpt-4-turbo",
-            messages=[{"role": "system", "content": prompt}],
-            temperature=0.5
-        )
+        try:
+            response = openai.ChatCompletion.create(
+                model="gpt-4-turbo",
+                messages=[{"role": "system", "content": prompt}],
+                temperature=0.5
+            )
+        except Exception as e:
+            print(e)
+            raise RuntimeError("Could not generate code")
         generated_code = response.choices[0].message["content"]
         return self.parse_llm_code(generated_code)
 
